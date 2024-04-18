@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipboy</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="buttons">
+    <div class ="header-wrapper">
+      <a href="stats">Stats</a>
+      <a href="inv">Inv</a>
+      <a href="data">Data</a>
+      <a href="map">Map</a>
+      <a href="radio">Radio</a>
+    </div>
+  </div>
+  <div class="content">
+    {% block content %} {% endblock %}
+  </div>
+  
+  <div class="footer">
+    <div class="hp"><h3>Hp: 100</h3></div>
+    <div class="lvl"><h3>LEVEL 1</h3></div>
+    <div class="ap"><h3>AP 70/70</h3></div>
+  </div>
+
+  <audio id="notificationSound" autoplay>
+    <source src="{{ url_for('static', filename='ui_pipboy_tab.wav') }}" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Get the current path
+    var path = window.location.pathname;
+
+    // Get all the <a> elements inside the header-wrapper
+    var links = document.querySelectorAll('.header-wrapper a');
+
+    // Loop through each <a> element
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
+      console.log(link.getAttribute('href'));
+
+      // Check if the href attribute matches the current path
+      if ("/" + link.getAttribute('href') === path) {
+        // Add the "active" class to the matching <a> element
+        link.classList.add('current-page');
+      }
+    }
+  </script>
+</body>
+</html>

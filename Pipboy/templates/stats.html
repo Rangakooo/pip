@@ -1,41 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <div>
-    <div class="buttons">
-      <div class ="header-wrapper">
-        <button class="current-page">Stats</button>
-        <button onclick="redirectTo('inv')">Inv</button>
-        <button onclick="redirectTo('data')">Data</button>
-        <button onclick="redirectTo('map')">Map</button>
-        <button onclick="redirectTo('radio')">Radio</button>
-      </header>
-    </div>
-    <div class="image-container">
-      <img src="{{ url_for('static', filename='character.gif') }}" alt="pipBoy">
-    </div>
-    <audio id="notificationSound" autoplay>
-      <source src="{{ url_for('static', filename='ui_pipboy_tab.wav') }}" type="audio/wav">
-      Your browser does not support the audio element.
-  </audio>
-  <div class="footer">
-    <div class="hp"><h3>Hp: 100</h3></div>
-    <div class="lvl"><h3>LEVEL 1</h3></div>
-    <div class="ap"><h3>AP 70/70</h3></div>
-  </div>
+{% extends 'template.html' %}
 
-    <script>
-        function redirectTo(page) {
-            window.location.href = "/" + page + ".html";
-        }
-        setTimeout(function() {
-            document.getElementById('notificationSound').pause();
-        }, 1000); 
-    </script>
-</body>
-</html>
+{% block content %}
+<div class="image-container">
+  <img src="{{ url_for('static', filename='character.gif') }}" alt="pipBoy">
+</div>
+{% endblock %}
