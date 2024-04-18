@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-    <div>
-        <div class="header-wrapper">
-        <header>
-            <div class="buttons">
-                <button onclick="redirectTo('stats')">Stats</button>
-                <button class="current-page">Inv</button>
-                <button onclick="redirectTo('data')">Data</button>
-                <button onclick="redirectTo('map')">Map</button>
-                <button onclick="redirectTo('radio')">Radio</button>
-            </div>
-        </header>
-        </div>
-        <audio id="notificationSound" autoplay>
-            <source src="{{ url_for('static', filename='ui_pipboy_tab.wav') }}" type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
+{% extends 'template.html' %}
+
+{% block content %}
         <div>
         <p>The current time is: <span id="clock"></span></p>
 
@@ -51,14 +29,4 @@
             // Call the function once immediately to avoid delay
             updateClock();
         </script>
-        <script>
-            function redirectTo(page) {
-                window.location.href = "/" + page + ".html";
-            }
-            setTimeout(function() {
-            document.getElementById('notificationSound').pause();
-        }, 1000); 
-        </script>
-    </div>
-</body>
-</html>
+{% endblock %}

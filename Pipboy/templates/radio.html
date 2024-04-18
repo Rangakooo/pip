@@ -1,43 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <div>
-    <div class="header-wrapper">
-      <header>
-        <div class="buttons">
-            <button onclick="redirectTo('stats')">Stats</button>
-            <button onclick="redirectTo('inv')">Inv</button>
-            <button onclick="redirectTo('data')">Data</button>
-            <button onclick="redirectTo('map')">Map</button>
-            <button class="current-page">Radio</button>
-        </div>
-      </header>
-    </div>
+{% extends 'template.html' %}
 
-    <div class="image-container">
-      <img src="{{ url_for('static', filename='radiowaves.gif') }}" alt="pipBoy">
-    </div>
-  </div>
+{% block content %}
 
-  <audio id="notificationSound" autoplay>
-    <source src="{{ url_for('static', filename='ui_pipboy_tab.wav') }}" type="audio/wav">
-    Your browser does not support the audio element.
-</audio>
-    </div>
-  
-
-    <script>
-        function redirectTo(page) {
-            window.location.href = "/" + page + ".html";
-        }
-        setTimeout(function() {
-            document.getElementById('notificationSound').pause();
-        }, 1000); 
-    </script>
-</body>
-</html>
+<div class="image-container">
+  <img src="{{ url_for('static', filename='radiowaves.gif') }}" alt="pipBoy">
+</div>
+{% endblock %}
