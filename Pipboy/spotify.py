@@ -10,6 +10,11 @@ class SpotifyAPI():
         self.refresh_token = None
         self.baseurl = 'https://api.spotify.com/v1/me/player'
         
+    def setsecret(self):
+        with open('secrets.json', 'r') as f:
+            secrets = json.load(f)
+            self.client_secret = secrets["secret"]
+        
 
     def settoks(self, access_token, refresh_token):
         self.access_token = access_token
