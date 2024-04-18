@@ -1,8 +1,29 @@
 {% extends 'template.html' %}
 
 {% block content %}
+<div class=" column container">
+  <div class="column vbuttons">
+        <a href="#" onclick="toggleButton(this)">Diamond City Radio</a>
+        <a href="#" onclick="toggleButton(this)">Radio New Vegas</a>
+        <a href="#" onclick="toggleButton(this)">Galaxy News Radio</a>
+        <a href="#" onclick="toggleButton(this)">Spotify Wasteland Mix</a>
 
-<div class="image-container">
+    </div>
+<div class="column image-container">
   <img src="{{ url_for('static', filename='radiowaves.gif') }}" alt="pipBoy">
 </div>
+</div>
+
+<script>
+  function toggleButton(button) {
+    var buttons = document.querySelectorAll('.vbuttons a');
+    buttons.forEach(function(btn) {
+      if (btn === button) {
+        btn.classList.toggle('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+</script>
 {% endblock %}

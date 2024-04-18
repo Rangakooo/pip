@@ -17,10 +17,14 @@ body {
 }
 
 .container {
-    max-width: 1280px;
-    height: 720px; 
-    border: 2px solid #00FF00;
-    display: flex;
+  display: flex;
+  height: 100vh;
+}
+
+.column {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
 .header-wrapper {
@@ -33,7 +37,7 @@ body {
 }
 
 .current-page {
-    color: #FF0000 !important;
+    color: #00FF00 !important;
 }
 
 .image-container {
@@ -55,7 +59,7 @@ body {
 }
 
 .heading, .buttons a {
-    color: #00FF00; /* Green text color */
+    color: #018601; /* Green text color */
     border: none;
     cursor: pointer;
     font-family: 'Monofonto', Courier, monospace;
@@ -67,6 +71,29 @@ body {
 
 .buttons button:last-child {
     margin-right: 0; /* Remove margin from the last button */
+}
+
+
+.vbuttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vbuttons a {
+    display: block;
+    padding: 10px;
+    background-color: #418105;
+    text-decoration: none;
+    color: #00FF00;
+}
+
+.vbuttons a:focus {
+  background-color: #274e02;
+}
+
+.vbuttons a:active {
+  background-color: #274e02;
 }
 
 .footer {
