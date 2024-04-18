@@ -6,49 +6,75 @@
   <title>Pipboy</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-  <div class="buttons">
-    <div class ="header-wrapper">
-      <a href="stats">Stats</a>
-      <a href="inv">Inv</a>
-      <a href="data">Data</a>
-      <a href="map">Map</a>
-      <a href="radio">Radio</a>
+  
+  <div>
+    <div class="buttons">
+      <div class ="header-wrapper">
+        <a href="stats">Stats</a>
+        <a href="inv">Inv</a>
+        <a href="data">Data</a>
+        <a href="map">Map</a>
+        <a href="radio">Radio</a>
+      </div>
     </div>
-  </div>
-  <div class="content">
-    {% block content %} {% endblock %}
+    <div class="content">
+      {% block content %} {% endblock %}
+    </div>
+    
+    <div class="footer">
+      <div class="hp"><h3>Hp: 100</h3></div>
+      <div class="lvl"><h3 id="age"></h3><div class="loading_bar"><div class="bar"></div></div></div>
+      <div class="ap"><h3>AP 70/70</h3></div>
+    </div>
+  
+    <audio id="notificationSound" autoplay>
+      <source src="{{ url_for('static', filename='ui_pipboy_tab.wav') }}" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
   </div>
   
-  <div class="footer">
-    <div class="hp"><h3>Hp: 100</h3></div>
-    <div class="lvl"><h3>LEVEL 1</h3></div>
-    <div class="ap"><h3>AP 70/70</h3></div>
-  </div>
-
-  <audio id="notificationSound" autoplay>
-    <source src="{{ url_for('static', filename='ui_pipboy_tab.wav') }}" type="audio/wav">
-    Your browser does not support the audio element.
-  </audio>
 
   <script>
-    // Get the current path
     var path = window.location.pathname;
-
-    // Get all the <a> elements inside the header-wrapper
     var links = document.querySelectorAll('.header-wrapper a');
 
-    // Loop through each <a> element
     for (var i = 0; i < links.length; i++) {
       var link = links[i];
       console.log(link.getAttribute('href'));
 
-      // Check if the href attribute matches the current path
       if ("/" + link.getAttribute('href') === path) {
-        // Add the "active" class to the matching <a> element
         link.classList.add('current-page');
       }
     }
+
+    function levelbar(){
+
+      var currentDate = new Date();
+      var targetDate = new Date(currentDate.getFullYear(), 2, 11); // Months are zero-based, so 11 represents December
+      if (currentDate > targetDate) {
+        targetDate.setFullYear(targetDate.getFullYear() + 1);
+      }
+      var timeDiff = Math.abs(currentDate.getTime() - targetDate.getTime());
+      var daysuntill = Math.ceil(365 - (timeDiff / (1000 * 3600 * 24)));
+      var percentagePassed = (Math.ceil((daysuntill / 365) * 100));
+
+
+      var bar = document.querySelector('.bar');
+      bar.style.background = `linear-gradient(to right, #00FF00 ${percentagePassed}%, #418105 0%)`;
+
+      var dob = new Date(2002, 2, 3);
+      var currentDate = new Date();
+      var timeDiff = Math.abs(currentDate.getTime() - dob.getTime());
+      var yearsSinceDob = Math.floor(timeDiff / (1000 * 3600 * 24 * 365));
+      
+      var age = document.getElementById('age');
+      age.innerHTML = `Level: ${yearsSinceDob}`;
+    }
+
+    levelbar()
+  </script>
   </script>
 </body>
 </html>

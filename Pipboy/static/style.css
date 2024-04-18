@@ -92,6 +92,8 @@ body {
   }
   
   .lvl{
+    display: flex;
+    justify-content: space-around;
     width: 50%;
     background-color: #418105;
     color: #7fff08;
@@ -101,4 +103,24 @@ body {
     width: 25%;
     background-color: #418105;
     color: #7fff08;
+  }
+
+  
+  .loading_bar{
+    height:100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+  }
+
+  .bar{
+    border: 2px solid #00FF00;
+    height:50%;
+    width: 100%;
+  }
+
+  .startup{
+    height:95vh;
+    width:auto;
   }
