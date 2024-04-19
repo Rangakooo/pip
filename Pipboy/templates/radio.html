@@ -1,6 +1,89 @@
 {% extends 'template.html' %}
 
 {% block content %}
-<h1>radio</h1>
-<h1>Currently Listening to: {{song}}</h1>
+<div class="radiowrapper">
+  <div class="songlist">
+    <div class="songs"></div>
+    <div class="playback">
+      <p>currently Playing:</p>
+      <div class="playbackwrapper">
+        <img width="100px" height="100px">
+        <div>
+          <h3></h3>
+          <div class="lengthwrapper">
+            <div class="progress">
+              <div id="progress_bar"></div>
+            </div>
+            <div id="length"></div>
+          </div>
+          <i class="fa-solid fa-headphones" style="color: #00FF00;"></i>
+        </div>
+        
+        <div class="playback_controls">
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="wavygif">
+    <img src="{{ url_for('static', filename='radiowaves.gif') }}" alt="pipBoy">
+  </div>
+</div>
+
+<script>
+  var currentlyPlaying = document.querySelector('.playback h3');
+  function playback(){
+    fetch('/media/player',{
+      method: 'GET'
+    }).then(response => response.json())
+    .then(data => {
+      currentlyPlaying.innerHTML = data.item.name
+      document.querySelector('.playback img').src = data.item.album.images[2].url
+      var duration = data.item.duration_ms
+      var progress = data.progress_ms;
+      var progress_bar = document.getElementById('progress_bar');
+      var duration = data.item.duration_ms;
+      var progress_bar = document.getElementById('progress_bar')
+      document.getElementById('length').innerHTML = millisToMinutesAndSeconds(duration)
+      playback_progress(duration, progress)
+    } )
+      
+    function playback_progress(duration, progress){
+      var progress_bar = document.getElementById('progress_bar');
+      var duration = duration;
+      var interval = 1000; // update progress every second
+
+      var updateProgress = setInterval(function() {
+        progress += interval;
+
+        progress_percent = (progress / duration) * 100;
+        progress_bar.style.background = `linear-gradient(to right, #00FF00 ${progress_percent}%, #418105 0%)`;
+        if (progress >= duration) {
+          clearInterval(updateProgress);
+          playback()
+        }
+      }, interval);
+    }
+      
+    }
+    function play() {
+        fetch('/media/play', {
+            method: 'POST'
+        });
+    }
+
+    function millisToMinutesAndSeconds(millis) {
+      var minutes = Math.floor(millis / 60000);
+      var seconds = ((millis % 60000) / 1000).toFixed(0);
+      return (
+        seconds == 60 ?
+        (minutes+1) + ":00" :
+        minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+      );
+    }
+
+
+    playback()
+</script>
 {% endblock %}

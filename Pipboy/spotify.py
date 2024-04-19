@@ -114,6 +114,7 @@ class SpotifyAPI():
             'Content-Type': 'application/json' 
         }
         r = requests.put(url, headers=headers)
+        print(r)
         if r.status_code == 401:
             self.refreshtok()
 
@@ -129,6 +130,21 @@ class SpotifyAPI():
             return r.json()["item"]["name"]
         elif r.status_code == 401:
             self.refreshtok()
+        return str(r.status_code)
+    
+    def player(self):
+        url = 'https://api.spotify.com/v1/me/player'
+        headers = {
+            'Authorization': f'Bearer {self.access_token}',
+            'Content-Type': 'application/json' 
+        }
+        r = requests.get(url, headers=headers)
+        if r.status_code == 200:  
+            return r.json()
+        elif r.status_code == 401:
+            self.refreshtok()
+
+        print(r)
         return str(r.status_code)
 
     def playbackstatus(self):
