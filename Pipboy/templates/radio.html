@@ -9,7 +9,7 @@
         <a href="#" onclick="toggleButton(this)">Spotify Wasteland Mix</a>
 
     </div>
-<div class="column image-container">
+<div class="column image-container2">
   <img src="{{ url_for('static', filename='radiowaves.gif') }}" alt="pipBoy">
 </div>
 </div>
@@ -17,18 +17,35 @@
 <script>
 
 function playRandomSong(button) {
-    var songList = ["UraniumFever.mp3", "UraniumRock.mp3", "AtomBombBaby.mp3"];  // Replace with your song filenames
-    var randomSong = songList[Math.floor(Math.random() * songList.length)];
+  var songList = ["UraniumFever.mp3", "UraniumRock.mp3", "AtomBombBaby.mp3"]; // Replace with your song filenames
+  var randomSong;
 
-    var player = document.getElementById("player");
-    player.src = "static/radio/diamond/" + randomSong;  // Assuming music files are in the static folder
+  do {
+    randomSong = songList[Math.floor(Math.random() * songList.length)];
+  } while (randomSong === currentSong); // Keep looping until a different song is chosen
 
-    // Add 'active' class to the clicked button
-    button.classList.add('active');
+  var player = document.getElementById("player");
+  player.src = "static/radio/diamond/" + randomSong; // Assuming music files are in the static folder
 
-    player.load();
-    player.play();
-  }
+  // Update currentSong variable to track the last played song
+  currentSong = randomSong;
+
+  // Add 'active' class to the clicked button
+  button.classList.add('active');
+
+  player.load();
+  player.play();
+
+  // Add event listener to handle the end of the song
+  player.addEventListener('ended', playAnotherRandomSong);
+}
+
+function playAnotherRandomSong() {
+  playRandomSong(); // Call the playRandomSong function again to play a new song
+}
+
+// Assuming currentSong is a global variable initialized to null initially
+var currentSong = null;
   function playMusic(button) {
     var player = document.getElementById("player");
     var buttons = document.querySelectorAll('.vbuttons a');
