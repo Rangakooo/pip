@@ -1,0 +1,73 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="buttons">
+  <div class="secondary-header">
+  <a href = "stats.html">Stats</a>
+  <a href="#">Special</a>
+  <a href="#">Perks</a>
+</div>
+</div>
+
+<div class=" column container">
+    <div class="column vbuttons">
+        <a href="#">Strength</a>
+        <a href="#">Perception</a>
+        <a href="#">Endurance</a>
+        <a href="#">Charisma</a>
+        <a href="#">Intelligence</a>
+        <a href="#">Agility</a>
+        <a href="#">Luck</a>
+  
+      </div>
+      <div class="column image-container2">
+        <img id="pipBoyImage" src="{{ url_for('static', filename='character.gif') }}" alt="pipBoy">
+      </div>
+
+      <script>
+        // Get the update button elements
+        var buttonElements = document.querySelectorAll(".vbuttons a");
+      
+        // Get the image element
+        var pipBoyImage = document.getElementById("pipBoyImage");
+      
+        function updateImage(button) {
+          var buttonText = button.textContent.toLowerCase(); // Get button text in lowercase
+      
+          switch (buttonText) {
+            case "strength":
+              pipBoyImage.src = "{{ url_for('static', filename='greenstrength.gif') }}";
+              break;
+            case "perception":
+              pipBoyImage.src = "{{ url_for('static', filename='greenperception.gif') }}";
+              break;
+              case "endurance":
+              pipBoyImage.src = "{{ url_for('static', filename='greenendurance.gif') }}";
+              break;
+              case "charisma":
+              pipBoyImage.src = "{{ url_for('static', filename='greencharisma.gif') }}";
+              break;
+              case "intelligence":
+              pipBoyImage.src = "{{ url_for('static', filename='greenintelligence.gif') }}";
+              break;
+              case "agility":
+              pipBoyImage.src = "{{ url_for('static', filename='greenagility.gif') }}";
+              break;
+              case "luck":
+              pipBoyImage.src = "{{ url_for('static', filename='greenluck.gif') }}";
+              break;
+            // Add similar cases for other buttons and their corresponding image filenames
+            default:
+              // Handle default image if no match found
+              pipBoyImage.src = "{{ url_for('static', filename='character.gif') }}"; // Default image
+          }
+        }
+        for (var i = 0; i < buttonElements.length; i++) {
+    buttonElements[i].addEventListener("click", function() {
+      updateImage(this); // Pass the clicked button element to the function
+    });
+  }
+
+  
+      </script>
+{% endblock %}

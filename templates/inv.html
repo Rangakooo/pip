@@ -1,0 +1,32 @@
+{% extends 'template.html' %}
+
+{% block content %}
+        <div>
+        <p>The current time is: <span id="clock"></span></p>
+
+        <script>
+            // Function to update the clock every second
+            function updateClock() {
+                var now = new Date();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+
+                // Add leading zeros to single-digit minutes and seconds
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                // Format the time as HH:MM:SS
+                var timeString = hours + ':' + minutes;
+
+                // Update the content of the clock element
+                $('#clock').text(timeString);
+            }
+
+            // Call the updateClock function every second
+            setInterval(updateClock, 1000);
+
+            // Call the function once immediately to avoid delay
+            updateClock();
+        </script>
+{% endblock %}
