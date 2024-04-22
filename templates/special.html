@@ -20,8 +20,9 @@
         <a href="#">Luck</a>
   
       </div>
-      <div class="column image-container2">
+      <div class="column image-container">
         <img id="pipBoyImage" src="{{ url_for('static', filename='character.gif') }}" alt="pipBoy">
+        <p id="pipBoyText">Select a S.P.E.C.I.A.L stat.</p> 
       </div>
 
       <script>
@@ -37,24 +38,31 @@
           switch (buttonText) {
             case "strength":
               pipBoyImage.src = "{{ url_for('static', filename='greenstrength.gif') }}";
+              pipBoyText.textContent = "Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.";
               break;
             case "perception":
               pipBoyImage.src = "{{ url_for('static', filename='greenperception.gif') }}";
+              pipBoyText.textContent = "Perception is your environmental awareness and 'sixth sense', and affects weapon accuracy in V.A.T.S.";
               break;
               case "endurance":
               pipBoyImage.src = "{{ url_for('static', filename='greenendurance.gif') }}";
+              pipBoyText.textContent ="Endurance is the measure of overall physical fitness. It affects your total health and the action point drain from sprinting.";
               break;
               case "charisma":
               pipBoyImage.src = "{{ url_for('static', filename='greencharisma.gif') }}";
+              pipBoyText.textContent ="Charisma is your ability to charm and convince others. It affects your success to persuade others in dialogue and prices when you barter";
               break;
               case "intelligence":
               pipBoyImage.src = "{{ url_for('static', filename='greenintelligence.gif') }}";
+              pipBoyText.textContent="Intelligence is the measure of your overall mental acuity, and affects the number of experience points earned.";
               break;
               case "agility":
               pipBoyImage.src = "{{ url_for('static', filename='greenagility.gif') }}";
+              pipBoyText.textContent ="Agility is a measure of your overall finesse and reflexes. It affects the number of Action Points in V.A.T.S. and your ability to sneak.";
               break;
               case "luck":
               pipBoyImage.src = "{{ url_for('static', filename='greenluck.gif') }}";
+              pipBoyText.textContent ="Luck is a measure of your general good fortune, and affects the recharge rates of critical hits.";
               break;
             // Add similar cases for other buttons and their corresponding image filenames
             default:
