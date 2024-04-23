@@ -14,24 +14,16 @@ body {
     background-color: #000;
     font-family: 'Monofonto', Courier, monospace;
     color: #00FF00;
-    bottom: 0;
-    left: 0;
-    margin: 0;
 }
 
 .container {
   display: flex;
   height: 100vh;
-  overflow-y: hidden;
 }
-.specialcontainer{
-  flex: 1;
-  padding: 20px;
-  overflow-y: hidden;
-}
+
 .column {
   flex: 1;
-  padding: 10px;
+  padding: 20px;
   overflow-y: auto;
 }
 
@@ -40,7 +32,7 @@ body {
     justify-content: space-around;
     width: 100%;
     text-align: center;
-    padding: 10px 0;
+    padding: 20px 0;
     border-bottom: 2px solid #00FF00;
 }
 
@@ -52,46 +44,13 @@ body {
     text-align: center; /* Center the image horizontally */
     margin-top: 60px; /* Add margin between buttons and image */
     padding: 50px;
-    overflow-y: hidden;
 }
 
-.image-container2 {
-  justify-content: center;
-  text-align: center; /* Center the image horizontally */
-  overflow-y: hidden;
-
-}
-
-#pipBoyText {
-  text-align: center; /* Center the text horizontally */
-}
-
-#pipBoyImage {
-  max-width: 100px; /* Make the image responsive */
-  max-height: 200px;
-}
-
-.image-container img .image-container2 img{
+.image-container img {
     max-width: 100%; /* Ensure the image fits within the container */
     max-height: 100%; /* Ensure the image fits within the container */
+    display:block;
     margin: 0 auto;
-}
-
-.stat-container{
-  display: inline-flex;
-  justify-content: space-between;
-  color: #00FF00;
-  padding: 8px;
-}
-.stat-container:hover {
-  background-color: #274e02;
-}
-.stat-container a {
-  text-decoration: none;
-  color: #00FF00;
-}
-[data-active="True"] {
-  background-color: #274e02;
 }
 
 .video {
@@ -104,7 +63,7 @@ body {
     border: none;
     cursor: pointer;
     font-family: 'Monofonto', Courier, monospace;
-    font-size: 18px; /* Larger font size for the header */
+    font-size: 24px; /* Larger font size for the header */
     text-decoration: none; /* Remove underline */
     background-color: transparent; /* Remove background color */
     margin-right: 20px; /* Add margin between buttons */
@@ -114,70 +73,50 @@ body {
     margin-right: 0; /* Remove margin from the last button */
 }
 
-.secondary-header {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  text-align: center;
-  padding: 15px 0;
-}
-
-#map {
-  height: 67%;
-  width: 100%;
-}
 
 .vbuttons {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  color: #00FF00;
+  gap: 10px;
 }
 
-.image-container2 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.vbuttons a .stat-number{
+.vbuttons a {
     display: block;
-    padding: 1px;
+    padding: 10px;
+    background-color: #418105;
     text-decoration: none;
     color: #00FF00;
 }
 
-.vbuttons a:active .stat-number:active .stat-container:active{
+.vbuttons a:focus {
   background-color: #274e02;
 }
 
-.vbuttons a:focus .stat-number:focus {
+.vbuttons a:active {
   background-color: #274e02;
 }
 
 .footer {
-  justify-content: space-around;
-  position: absolute;
-  bottom:0px;
-  background-color: #000;
-  text-align: center;
-  width: 100%;
-  display:flex;
-  gap: 5px;
-  height: 40px;
+    position: absolute;
+    bottom: 10px;
+    background-color: #000;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
   }
 
 .hp{
     width: 25%;
-    font-size: 18px; 
     background-color: #418105;
     color: #7fff08;
   }
   
   .lvl{
+    width: 50%;
     display: flex;
     justify-content: space-around;
-    width: 50%;
     background-color: #418105;
     color: #7fff08;
   }
@@ -190,7 +129,7 @@ body {
 
   .loadingbar{
     height:100%;
-    width: 250px;
+    width: 80%;
     display: flex;
     flex-direction: column; 
     justify-content: center;

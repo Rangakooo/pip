@@ -27,9 +27,5 @@ def map():
 def radio():
     return render_template('radio.html')
 
-@app.route('/special.html')
-def special():
-    return render_template('special.html')
-
 if __name__ == "__main__":
     app.run(debug=True)

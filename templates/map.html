@@ -1,48 +1,6 @@
 {% extends 'template.html' %}
 
 {% block content %}
-<div id="map"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-  // Leaflet map initialization (unchanged)
-  var map = L.map('map');
-
-  // Customize the map tiles colors (unchanged)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: ''
-  }).addTo(map);
-
-  // Function to display user location if allowed
-  function showUserLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var userLatitude = position.coords.latitude;
-        var userLongitude = position.coords.longitude;
-
-        // Update map center to user's location
-        map.setView([userLatitude, userLongitude], 17);
-
-        // Optional: Add a marker for the user's location
-        var userIcon = L.icon({
-          iconUrl: 'static/mapcross.png', // Replace with your user location icon
-          iconSize: [50, 50],
-          iconAnchor: [25, 25],
-        });
-
-        L.marker([userLatitude, userLongitude], {icon: userIcon}).addTo(map)
-          .bindPopup('You are here!');
-      });
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }
-
-  // Call the function to attempt user location display
-  showUserLocation();
-
-  // Customize marker color and popup (unchanged)
-  // ... (rest of your marker code)
-</script>
 
 {% endblock %}
