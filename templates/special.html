@@ -11,33 +11,35 @@
 
 <div class=" column container">
   <div class="column vbuttons">
-    <div class="stat-container">
+    <div class="stat-container" data-active="True" id="Strength">
       <a href="#">Strength</a> <span class="stat-number">18</span>
     </div>
-    <div class="stat-container">
+    <div class="stat-container" data-active="False" id="Perception">
       <a href="#">Perception</a> <span class="stat-number" style="float: right;">14</span>
     </div>
-    <div class="stat-container">
+    <div class="stat-container" data-active="False" id="Endurance">
       <a href="#">Endurance</a> <span class="stat-number" style="float: right;">16</span>
     </div>
-    <div class="stat-container">
+    <div class="stat-container" data-active="False" id ="Charisma">
       <a href="#">Charisma</a> <span class="stat-number" style="float: right;">10</span>
     </div>
-    <div class="stat-container">
+    <div class="stat-container" data-active="False" id="Intelligence">
       <a href="#">Intelligence</a> <span class="stat-number" style="float: right;">12</span>
     </div>
-    <div class="stat-container">
+    <div class="stat-container" data-active="False" id ="Agility">
       <a href="#">Agility</a> <span class="stat-number" style="float: right;">15</span>
     </div>
-    <div class="stat-container">
+    <div class="stat-container" data-active="False" id = "Luck">
       <a href="#">Luck</a> <span class="stat-number" style="float: right;">8</span>
     </div>
   </div>
-      <div class="column image-container">
-        <img id="pipBoyImage" src="{{ url_for('static', filename='character.gif') }}" alt="pipBoy">
-        <p id="pipBoyText">Select a S.P.E.C.I.A.L stat.</p> 
+      <div class="specialcontainer">
+        <div class = image-container2>
+        <img id="pipBoyImage" src="{{ url_for('static', filename='greenstrength.gif') }}" alt="pipBoy">
+        </div>
+        <p id="pipBoyText">Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.</p> 
       </div>
-
+    </div>
       <script>
         // Get the update button elements
         var buttonElements = document.querySelectorAll(".vbuttons a");
@@ -47,35 +49,43 @@
       
         function updateImage(button) {
           var buttonText = button.textContent.toLowerCase(); // Get button text in lowercase
-      
+          const elements = document.querySelector('[data-active="True"]')
+          elements.setAttribute('data-active','False');
           switch (buttonText) {
             case "strength":
               pipBoyImage.src = "{{ url_for('static', filename='greenstrength.gif') }}";
               pipBoyText.textContent = "Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.";
+              document.getElementById('Strength').setAttribute('data-active','True');
               break;
             case "perception":
               pipBoyImage.src = "{{ url_for('static', filename='greenperception.gif') }}";
               pipBoyText.textContent = "Perception is your environmental awareness and 'sixth sense', and affects weapon accuracy in V.A.T.S.";
+              document.getElementById('Perception').setAttribute('data-active','True');
               break;
               case "endurance":
               pipBoyImage.src = "{{ url_for('static', filename='greenendurance.gif') }}";
               pipBoyText.textContent ="Endurance is the measure of overall physical fitness. It affects your total health and the action point drain from sprinting.";
+              document.getElementById('Endurance').setAttribute('data-active','True');
               break;
               case "charisma":
               pipBoyImage.src = "{{ url_for('static', filename='greencharisma.gif') }}";
               pipBoyText.textContent ="Charisma is your ability to charm and convince others. It affects your success to persuade others in dialogue and prices when you barter";
+              document.getElementById('Charisma').setAttribute('data-active','True');
               break;
               case "intelligence":
               pipBoyImage.src = "{{ url_for('static', filename='greenintelligence.gif') }}";
               pipBoyText.textContent="Intelligence is the measure of your overall mental acuity, and affects the number of experience points earned.";
+              document.getElementById('Intelligence').setAttribute('data-active','True');
               break;
               case "agility":
               pipBoyImage.src = "{{ url_for('static', filename='greenagility.gif') }}";
               pipBoyText.textContent ="Agility is a measure of your overall finesse and reflexes. It affects the number of Action Points in V.A.T.S. and your ability to sneak.";
+              document.getElementById('Agility').setAttribute('data-active','True');
               break;
               case "luck":
               pipBoyImage.src = "{{ url_for('static', filename='greenluck.gif') }}";
               pipBoyText.textContent ="Luck is a measure of your general good fortune, and affects the recharge rates of critical hits.";
+              document.getElementById('Luck').setAttribute('data-active','True');
               break;
             // Add similar cases for other buttons and their corresponding image filenames
             default:
