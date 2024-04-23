@@ -10,16 +10,29 @@
 </div>
 
 <div class=" column container">
-    <div class="column vbuttons">
-        <a href="#">Strength</a>
-        <a href="#">Perception</a>
-        <a href="#">Endurance</a>
-        <a href="#">Charisma</a>
-        <a href="#">Intelligence</a>
-        <a href="#">Agility</a>
-        <a href="#">Luck</a>
-  
-      </div>
+  <div class="column vbuttons">
+    <div class="stat-container">
+      <a href="#">Strength</a> <span class="stat-number">18</span>
+    </div>
+    <div class="stat-container">
+      <a href="#">Perception</a> <span class="stat-number" style="float: right;">14</span>
+    </div>
+    <div class="stat-container">
+      <a href="#">Endurance</a> <span class="stat-number" style="float: right;">16</span>
+    </div>
+    <div class="stat-container">
+      <a href="#">Charisma</a> <span class="stat-number" style="float: right;">10</span>
+    </div>
+    <div class="stat-container">
+      <a href="#">Intelligence</a> <span class="stat-number" style="float: right;">12</span>
+    </div>
+    <div class="stat-container">
+      <a href="#">Agility</a> <span class="stat-number" style="float: right;">15</span>
+    </div>
+    <div class="stat-container">
+      <a href="#">Luck</a> <span class="stat-number" style="float: right;">8</span>
+    </div>
+  </div>
       <div class="column image-container">
         <img id="pipBoyImage" src="{{ url_for('static', filename='character.gif') }}" alt="pipBoy">
         <p id="pipBoyText">Select a S.P.E.C.I.A.L stat.</p> 
