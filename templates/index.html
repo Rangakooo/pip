@@ -6,14 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-        <video class = "startup" autoplay muted onended="redirect()">
-            <source src="{{ url_for('static', filename='startup.mp4') }}" type="video/mp4">
-        </video>  
+    <video class = "startup" autoplay muted onended="redirect()"> <source src="{{ url_for('static', filename='startup.mp4') }}" type="video/mp4"> </video>  
 
     <script>
-        function redirect() {
-            window.location.href = "/stats.html";
-        }
+        function redirect() {window.location.href = "/stats.html";}
     </script>
 </body>
 </html>

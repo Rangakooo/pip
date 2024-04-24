@@ -3,10 +3,10 @@
 {% block content %}
 <div class="buttons">
   <div class="secondary-header">
-  <a href = "stats.html">Stats</a>
-  <a href="#">Special</a>
-  <a href="#">Perks</a>
-</div>
+    <a href = "stats.html">Stats</a>
+    <a href="#">Special</a>
+    <a href="#">Perks</a>
+  </div>
 </div>
 
 <div class=" column container">
@@ -33,72 +33,63 @@
       <a href="#">Luck</a> <span class="stat-number" style="float: right;">8</span>
     </div>
   </div>
-      <div class="specialcontainer">
-        <div class = image-container2>
-        <img id="pipBoyImage" src="{{ url_for('static', filename='greenstrength.gif') }}" alt="pipBoy">
-        </div>
-        <p id="pipBoyText">Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.</p> 
-      </div>
-    </div>
-      <script>
-        // Get the update button elements
-        var buttonElements = document.querySelectorAll(".vbuttons a");
-      
-        // Get the image element
-        var pipBoyImage = document.getElementById("pipBoyImage");
-      
-        function updateImage(button) {
-          var buttonText = button.textContent.toLowerCase(); // Get button text in lowercase
-          const elements = document.querySelector('[data-active="True"]')
-          elements.setAttribute('data-active','False');
-          switch (buttonText) {
-            case "strength":
-              pipBoyImage.src = "{{ url_for('static', filename='greenstrength.gif') }}";
-              pipBoyText.textContent = "Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.";
-              document.getElementById('Strength').setAttribute('data-active','True');
-              break;
-            case "perception":
-              pipBoyImage.src = "{{ url_for('static', filename='greenperception.gif') }}";
-              pipBoyText.textContent = "Perception is your environmental awareness and 'sixth sense', and affects weapon accuracy in V.A.T.S.";
-              document.getElementById('Perception').setAttribute('data-active','True');
-              break;
-              case "endurance":
-              pipBoyImage.src = "{{ url_for('static', filename='greenendurance.gif') }}";
-              pipBoyText.textContent ="Endurance is the measure of overall physical fitness. It affects your total health and the action point drain from sprinting.";
-              document.getElementById('Endurance').setAttribute('data-active','True');
-              break;
-              case "charisma":
-              pipBoyImage.src = "{{ url_for('static', filename='greencharisma.gif') }}";
-              pipBoyText.textContent ="Charisma is your ability to charm and convince others. It affects your success to persuade others in dialogue and prices when you barter";
-              document.getElementById('Charisma').setAttribute('data-active','True');
-              break;
-              case "intelligence":
-              pipBoyImage.src = "{{ url_for('static', filename='greenintelligence.gif') }}";
-              pipBoyText.textContent="Intelligence is the measure of your overall mental acuity, and affects the number of experience points earned.";
-              document.getElementById('Intelligence').setAttribute('data-active','True');
-              break;
-              case "agility":
-              pipBoyImage.src = "{{ url_for('static', filename='greenagility.gif') }}";
-              pipBoyText.textContent ="Agility is a measure of your overall finesse and reflexes. It affects the number of Action Points in V.A.T.S. and your ability to sneak.";
-              document.getElementById('Agility').setAttribute('data-active','True');
-              break;
-              case "luck":
-              pipBoyImage.src = "{{ url_for('static', filename='greenluck.gif') }}";
-              pipBoyText.textContent ="Luck is a measure of your general good fortune, and affects the recharge rates of critical hits.";
-              document.getElementById('Luck').setAttribute('data-active','True');
-              break;
-            // Add similar cases for other buttons and their corresponding image filenames
-            default:
-              // Handle default image if no match found
-              pipBoyImage.src = "{{ url_for('static', filename='character.gif') }}"; // Default image
-          }
-        }
-        for (var i = 0; i < buttonElements.length; i++) {
-    buttonElements[i].addEventListener("click", function() {
-      updateImage(this); // Pass the clicked button element to the function
-    });
-  }
 
-  
-      </script>
+  <div class="specialcontainer">
+    <div class = image-container2>
+      <img id="pipBoyImage" src="{{ url_for('static', filename='/statimages/specialimages/greenstrength.gif') }}" alt="pipBoy">
+    </div>
+    <p id="pipBoyText">Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.</p> 
+  </div>
+</div>
+
+<script>
+  var buttonElements = document.querySelectorAll(".vbuttons a");
+  var pipBoyImage = document.getElementById("pipBoyImage");
+
+  function updateImage(button) {
+    var buttonText = button.textContent.toLowerCase();
+    const elements = document.querySelector('[data-active="True"]')
+    elements.setAttribute('data-active','False');
+    switch (buttonText) {
+      case "strength":
+        pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greenstrength.gif') }}";
+        pipBoyText.textContent = "Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.";
+        document.getElementById('Strength').setAttribute('data-active','True');
+        break;
+      case "perception":
+        pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greenperception.gif') }}";
+        pipBoyText.textContent = "Perception is your environmental awareness and 'sixth sense', and affects weapon accuracy in V.A.T.S.";
+        document.getElementById('Perception').setAttribute('data-active','True');
+        break;
+        case "endurance":
+        pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greenendurance.gif') }}";
+        pipBoyText.textContent ="Endurance is the measure of overall physical fitness. It affects your total health and the action point drain from sprinting.";
+        document.getElementById('Endurance').setAttribute('data-active','True');
+        break;
+        case "charisma":
+        pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greencharisma.gif') }}";
+        pipBoyText.textContent ="Charisma is your ability to charm and convince others. It affects your success to persuade others in dialogue and prices when you barter";
+        document.getElementById('Charisma').setAttribute('data-active','True');
+        break;
+        case "intelligence":
+        pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greenintelligence.gif') }}";
+        pipBoyText.textContent="Intelligence is the measure of your overall mental acuity, and affects the number of experience points earned.";
+        document.getElementById('Intelligence').setAttribute('data-active','True');
+        break;
+        case "agility":
+        pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greenagility.gif') }}";
+        pipBoyText.textContent ="Agility is a measure of your overall finesse and reflexes. It affects the number of Action Points in V.A.T.S. and your ability to sneak.";
+        document.getElementById('Agility').setAttribute('data-active','True');
+        break;
+        case "luck":
+        pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greenluck.gif') }}";
+        pipBoyText.textContent ="Luck is a measure of your general good fortune, and affects the recharge rates of critical hits.";
+        document.getElementById('Luck').setAttribute('data-active','True');
+        break;}}
+
+  for (var i = 0; i < buttonElements.length; i++) {
+    ButtonElements[i].addEventListener("click", function() {
+    updateImage(this);});}
+</script>
+
 {% endblock %}
