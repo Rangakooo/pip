@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///inventory.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///pipboy.db'
 
 db = SQLAlchemy(app)
 
@@ -17,6 +17,26 @@ class inventory(db.Model):
         self.quantity = quantity
         self.category = category
 
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    dob = db.Column(db.DateTime, nullable=False)
+
+class Special(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    level = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, name, level):
+        self.name = name
+        self.level = level
+
+class Location(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    longitude = db.Column(db.Float, nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    icon = db.Column(db.String(255), nullable=False)
+    
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -44,7 +64,8 @@ def radio():
 
 @app.route('/special.html')
 def special():
-    return render_template('special.html')
+    special = Special.query.all()
+    return render_template('special.html', special=special)
 
 
 @app.route('/inv/show_all_items')
