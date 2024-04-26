@@ -11,45 +11,34 @@
 
 <div class=" column container">
   <div class="column vbuttons">
-    <div class="stat-container" data-active="True" id="Strength">
-      <a href="#">Strength</a> <span class="stat-number">18</span>
+    {% for stat in special %}
+    <div class="stat-container" data-active="False" id= "{{ stat.name }}"><a href="#">{{ stat.name }}</a> <span class="stat-number" style="float: right;">{{ stat.level }}</span>
     </div>
-    <div class="stat-container" data-active="False" id="Perception">
-      <a href="#">Perception</a> <span class="stat-number" style="float: right;">14</span>
-    </div>
-    <div class="stat-container" data-active="False" id="Endurance">
-      <a href="#">Endurance</a> <span class="stat-number" style="float: right;">16</span>
-    </div>
-    <div class="stat-container" data-active="False" id ="Charisma">
-      <a href="#">Charisma</a> <span class="stat-number" style="float: right;">10</span>
-    </div>
-    <div class="stat-container" data-active="False" id="Intelligence">
-      <a href="#">Intelligence</a> <span class="stat-number" style="float: right;">12</span>
-    </div>
-    <div class="stat-container" data-active="False" id ="Agility">
-      <a href="#">Agility</a> <span class="stat-number" style="float: right;">15</span>
-    </div>
-    <div class="stat-container" data-active="False" id = "Luck">
-      <a href="#">Luck</a> <span class="stat-number" style="float: right;">8</span>
-    </div>
+    {% endfor %}
   </div>
 
   <div class="specialcontainer">
     <div class = image-container2>
       <img id="pipBoyImage" src="{{ url_for('static', filename='/statimages/specialimages/greenstrength.gif') }}" alt="pipBoy">
     </div>
-    <p id="pipBoyText">Strength is a measure of your raw physical power. It affects how much you can carry, and determines the effectiveness of all melee attacks.</p> 
+    <p id="pipBoyText">Select a S.P.E.C.A.L stat.</p> 
   </div>
 </div>
 
 <script>
-  var buttonElements = document.querySelectorAll(".vbuttons a");
-  var pipBoyImage = document.getElementById("pipBoyImage");
+document.addEventListener('DOMContentLoaded', function() {
+    var buttonElements = document.querySelectorAll(".stat-container a");
+    var pipBoyImage = document.getElementById("pipBoyImage");
 
   function updateImage(button) {
     var buttonText = button.textContent.toLowerCase();
+    console.log(buttonText)
     const elements = document.querySelector('[data-active="True"]')
-    elements.setAttribute('data-active','False');
+    if (elements) {
+    elements.setAttribute('data-active', 'False');
+} else {
+    ;
+}
     switch (buttonText) {
       case "strength":
         pipBoyImage.src = "{{ url_for('static', filename='/statimages/specialimages/greenstrength.gif') }}";
@@ -88,8 +77,8 @@
         break;}}
 
   for (var i = 0; i < buttonElements.length; i++) {
-    ButtonElements[i].addEventListener("click", function() {
-    updateImage(this);});}
+    buttonElements[i].addEventListener("click", function() {
+    updateImage(this);});}});
 </script>
 
 {% endblock %}
