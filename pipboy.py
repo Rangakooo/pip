@@ -27,6 +27,11 @@ class Special(db.Model):
     name = db.Column(db.String(255), nullable=False)
     level = db.Column(db.Integer, nullable=False)
 
+class Perks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    level = db.Column(db.Integer, nullable=False)
+
     def __init__(self, name, level):
         self.name = name
         self.level = level
@@ -49,6 +54,11 @@ def stats():
 def inv():
     items = inventory.query.all()
     return render_template('inv.html', items=items)
+
+@app.route('/perks.html')
+def perks():
+    perks = Perks.query.all()
+    return render_template('perks.html', perks=perks)
 
 @app.route('/data.html')
 def data():
