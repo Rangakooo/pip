@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    <img src="static/scanlines2.gif" id ="scan">
+    
     <div class="buttons">
         <div class ="header-wrapper">
           <a href = "/stats.html">Stats</a>
@@ -23,11 +25,11 @@
     {% block content %} {% endblock %}
 
     <div class="footer">
+        <img src="static/scanlines2.gif" id ="scan">
         <div class="hp"><a>Hp: 100<a></div>
         <div class="lvl"><a id = "age"><a><div class="loadingbar"><div class="bar"></div></div></div>
         <div class="ap"><a>AP 70/70<a></div>
     </div>
-
     <audio id="notificationSound" autoplay>
         <source src="{{ url_for('static', filename='ui_pipboy_tab.wav') }}" type="audio/wav">
         Your browser does not support the audio element.
