@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -31,6 +31,7 @@ class Perks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     level = db.Column(db.Integer, nullable=False)
+    max_level = db.Column(db.Integer, nullable=False)
 
     def __init__(self, name, level):
         self.name = name
@@ -41,6 +42,40 @@ class Location(db.Model):
     longitude = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     icon = db.Column(db.String(255), nullable=False)
+
+@app.route('/update_level', methods=['POST'])
+def update_level():
+    data = request.get_json()
+    stat_name = data.get('stat')
+    level_change = data.get('levelChange')
+
+    # Query the database to find the stat
+    stat = Special.query.filter_by(name=stat_name).first()
+
+    if stat:
+        # Update the level
+        stat.level += level_change
+        db.session.commit()
+        return jsonify(stat.level)  # Return the updated level
+    else:
+        return jsonify({'error': 'Stat not found'}), 404
+
+@app.route('/update_perk_level', methods=['POST'])
+def update_perk_level():
+    data = request.get_json()
+    stat_name = data.get('stat')
+    level_change = data.get('levelChange')
+
+    # Query the database to find the stat
+    stat = Perks.query.filter_by(name=stat_name).first()
+
+    if stat:
+        # Update the level
+        stat.level += level_change
+        db.session.commit()
+        return jsonify(stat.level)  # Return the updated level
+    else:
+        return jsonify({'error': 'Stat not found'}), 404
     
 @app.route('/')
 def index():
