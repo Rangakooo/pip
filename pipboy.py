@@ -21,6 +21,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     dob = db.Column(db.DateTime, nullable=False)
+    points = db.Column(db.Integer)
 
 class Special(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -76,14 +77,27 @@ def update_perk_level():
         return jsonify(stat.level)  # Return the updated level
     else:
         return jsonify({'error': 'Stat not found'}), 404
-    
+
+@app.route('/get_user_points', methods=['GET'])
+def get_user_points():
+    # Assuming you have a user object, you can retrieve the points value
+    user = User.query.filter_by(user_id=1).first()
+    print(user)
+    return jsonify({'points': user.points})
+
+@app.route('/template.html')
+def template():
+    users = User.query.all()
+    return render_template('template.html', users=users)
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/stats.html')
 def stats():
-    return render_template('stats.html')
+    users = User.query.all()
+    return render_template('stats.html', users=users)
 
 @app.route('/inv.html')
 def inv():

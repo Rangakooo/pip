@@ -22,9 +22,9 @@
       <img id="pipBoyImage" src="{{ url_for('static', filename='/statimages/specialimages/greenstrength.gif') }}" alt="pipBoy">
     </div>
     <div class="level-container">
-      <img id="decrementImage" src="{{ url_for('static', filename='/arrow.png') }}" alt="-" />
+      <img id="decrementImage" src="{{ url_for('static', filename='/decreasearrow.png') }}" alt="-" />
       <span id="statLevel"></span> <!-- Level text -->
-      <img id="incrementImage" src="{{ url_for('static', filename='/arrow.png') }}" alt="+" />
+      <img id="incrementImage" src="{{ url_for('static', filename='/increasearrow.png') }}" alt="+" />
     </div>
     <p id="pipBoyText">Select a S.P.E.C.A.L stat.</p> 
   </div>
@@ -93,38 +93,65 @@ document.addEventListener('DOMContentLoaded', function() {
     buttonElements[i].addEventListener("click", function() {
     updateImage(this);});}
 
-    function updateLevel(stat, levelChange) {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/update_level", true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              var newLevel = parseInt(xhr.responseText);
-              document.getElementById("statLevel").textContent = "" + newLevel ;
-              document.getElementById(stat).querySelector('.stat-number').textContent = newLevel; // Update the level on the button
-          }
-      };
-      xhr.send(JSON.stringify({stat: stat, levelChange: levelChange}));
-  }
+  function updateLevel(stat, levelChange) {
+    console.log("Hi")
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/update_level", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var newLevel = parseInt(xhr.responseText);
+            document.getElementById("statLevel").textContent = "" + newLevel;
+            document.getElementById(stat).querySelector('.stat-number').textContent = newLevel; // Update the level on the button
+        }
+    };
 
-  decrementImage.addEventListener("click", function() {
+    // Check user points before updating level
+    var pointsXhr = new XMLHttpRequest();
+    pointsXhr.open("GET", "/get_user_points", true);
+    pointsXhr.onreadystatechange = function() {
+        if (pointsXhr.readyState === 4 && pointsXhr.status === 200) {
+            var response = JSON.parse(pointsXhr.responseText);
+            var points = parseInt(response.points);
+            console.log("User points:", points);
+            if (points > 0) {
+                // Decrease points by 1 and update the database
+                var updatedPoints = points - 1;
+                var decreasePointsXhr = new XMLHttpRequest();
+                decreasePointsXhr.open("POST", "/update_user_points", true);
+                decreasePointsXhr.setRequestHeader("Content-Type", "application/json");
+                decreasePointsXhr.send(JSON.stringify({ points: updatedPoints }));
+                // Update the level in the perks table
+                xhr.send(JSON.stringify({ stat: stat, levelChange: levelChange }));
+            } else {
+                // Handle case when points are already 0
+                console.log("Points are already 0.");
+            }
+        }
+    };
+    pointsXhr.send();
+}
+
+decrementImage.addEventListener("click", function() {
+    console.log("HIHI")
+    // Event listener for decrement button
     var stat = document.querySelector('[data-active="True"]').id;
     var currentLevel = parseInt(document.getElementById(stat).querySelector('.stat-number').textContent); // Get current level
     if (currentLevel > 0) {
-        updateLevel(stat, -1);
+        updateLevel(stat, -1); // Call updateLevel function with levelChange -1
     }
+});
 
-    });
-
-    incrementImage.addEventListener("click", function() {
+incrementImage.addEventListener("click", function() {
+    // Event listener for increment button
     var stat = document.querySelector('[data-active="True"]').id;
     var currentLevel = parseInt(document.getElementById(stat).querySelector('.stat-number').textContent); // Get current level
-    if (currentLevel < 10) {
-        updateLevel(stat, 1);
-    }
-    });
 
-  });
+    if (currentLevel < 10) {
+        updateLevel(stat, 1); // Call updateLevel function with levelChange 1
+    }
+});
+});
 
 </script>
 
