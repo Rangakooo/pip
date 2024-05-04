@@ -1,0 +1,49 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<div class="container">
+<div class="column container" style = "font-size:150px; display: flex; flex-direction: column; text-align: center; width:50%;">
+    <a id="hours"><a>
+    <a id="minutes"><a>
+</div>
+
+<div class="column container" style ="text-align: center; width:50%; display: inline-flex; flex-direction: column;"  >
+    <img src="{{ url_for('static', filename='/statimages/specialimages/greencharisma.gif') }}" alt="pipBoy" style="max-height: 250px">
+    <div style="display: inline-flex; gap: 20px; font-size: 30px;">
+    <div class ="datebox" style = "background-color: green; ">
+        <a id = "date"></a>
+    </div>
+    <div class ="datebox" style="border:none">
+        <a id = "month"></a>
+    </div>
+</div>
+  </div>
+</div>
+
+<script>
+    function updateClock() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        var month = now.toLocaleString("default", { month: "short" });
+        var wday = now.toLocaleDateString("default", { weekday: "short" }); // Full day name
+        var day = now.getDate();
+
+        // Ensure two-digit formatting
+        if (hours < 10) hours = '0' + hours;
+        if (minutes < 10) minutes = '0' + minutes;
+
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('date').textContent = wday + " " + day;
+        document.getElementById('month').textContent = month;
+    }
+
+    // Update the clock every minute
+    setInterval(updateClock, 1000);
+
+    // Initial call to display clock immediately
+    updateClock();
+</script>
+{% endblock %}
