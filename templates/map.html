@@ -1,0 +1,66 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  var map = L.map('map').setView([52.0525, 1.4317], 13);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: ''
+  }).addTo(map);
+
+  function showUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var userLatitude = position.coords.latitude;
+        var userLongitude = position.coords.longitude;
+
+        map.setView([userLatitude, userLongitude], 17);
+
+        var userIcon = L.icon({
+          iconUrl: 'static/mapicons/mapcross.png',
+          iconSize: [50, 50],
+          iconAnchor: [25, 25],
+        });
+
+        var vaultIcon = L.icon({
+          iconUrl: 'static/mapicons/vaulticon.png',
+          iconSize: [26, 26],
+          iconAnchor: [13, 13],
+        });
+
+        var brotherhoodIcon = L.icon({
+          iconUrl: 'static/mapicons/brotherhoodicon.png',
+          iconSize: [26, 26],
+          iconAnchor: [13, 13],
+        });
+
+        var airshipIcon = L.icon({
+          iconUrl: 'static/mapicons/airshipicon.png',
+          iconSize: [36, 36],
+          iconAnchor: [18, 18],
+        });
+
+        var markers = [
+          { coords: [52.05253541986448, 1.4317721224085014], icon: vaultIcon },
+          { coords: [51.90391744820666, 0.8915833715780007], icon: vaultIcon },
+          { coords: [52.108209724507795, 1.3264547546750707], icon: vaultIcon},
+          { coords: [52.05696789418456, 1.2813417520241046], icon: brotherhoodIcon},
+          {coords: [51.900507185980516, 0.9267988115908379], icon: airshipIcon},
+          { coords: [userLatitude, userLongitude], icon: userIcon }
+        ];
+
+        markers.forEach(function(marker) {
+          L.marker(marker.coords, { icon: marker.icon }).addTo(map);
+        });
+      });
+    }
+  }
+
+  showUserLocation();
+</script>
+
+{% endblock %}

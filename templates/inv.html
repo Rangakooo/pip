@@ -1,0 +1,28 @@
+{% extends 'template.html' %}
+
+{% block content %}
+
+<div class="buttons">
+  <div class="secondary-header">
+    <a href="{{ url_for('show_all_items') }}">All</a>
+    <a href="{{ url_for('show_items_category',category = 'weapon')}}">Weapons</a>
+    <a href="{{ url_for('show_items_category',category = 'apparel')}}">Apparel</a>
+    <a href="{{ url_for('show_items_category',category = 'aid')}}">Aid</a>
+    <a href="{{ url_for('show_items_category',category = 'misc')}}">Misc</a>
+    <a href="{{ url_for('show_items_category',category = 'junk')}}">Junk</a>
+    <a href="{{ url_for('show_items_category',category = 'ammo')}}">Ammo</a>
+  </div>
+</div>
+
+<div class=" column container">
+  <div class="column vbuttons">
+    {% for item in items %}
+      <a href="#" style="display: flex; justify-content: space-between;"> <span>{{ item.name }}</span><span style = "text-align: right;">{{ item.quantity }}</span></a>
+    {% endfor %}
+  </div>
+  <div class="column image-container2">
+    <img src="{{ url_for('static', filename='radiowaves.gif') }}" alt="pipBoy">
+  </div>
+</div>
+
+{% endblock %}
